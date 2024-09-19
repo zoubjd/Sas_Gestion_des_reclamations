@@ -1,5 +1,4 @@
 #include "gestion.h"
-#include <dos.h>
 
 /*les fcts de client*/
 

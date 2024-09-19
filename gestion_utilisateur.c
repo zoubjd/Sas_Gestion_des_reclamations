@@ -72,8 +72,10 @@ int connexion(Utilisateur *utilisateurs)
             return i;
         }
     }
+    count++;
     } while (count < 3);
     printf("Trop de tentatives. Connexion impossible.\n");
+    exit(-1);
     return -1;
 }
 

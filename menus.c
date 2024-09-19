@@ -73,5 +73,6 @@ case 3:
 default:
     break;
 }
+return 0;
 }
 

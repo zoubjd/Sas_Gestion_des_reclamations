@@ -29,8 +29,8 @@ typedef struct {
     char date[11];
     
 } Reclamation;
-int users_count = 0;
-int reclamations_count = 0;
+extern int users_count;
+extern int reclamations_count;
 
 //functions
 

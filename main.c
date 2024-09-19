@@ -7,6 +7,8 @@ Projet SAS : Gestion des réclamations
 
 
 
+    int users_count = 0;
+    int reclamations_count = 0;
 int main()
 {
     int choice = 0;
@@ -44,7 +46,7 @@ int main()
 
         printf("Connexion\n");
         index = connexion(utilisateurs);
-        if (index && strcmp(utilisateurs[index].role, "admin") == 0)
+        if (index >= 0 && strcmp(utilisateurs[index].role, "admin") == 0)
             {
                 printf("Vous etes un administrateur!\n");
             }
