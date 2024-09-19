@@ -48,3 +48,6 @@ int modifier_role(Utilisateur *utilisateurs);
 // fcts de client
 int ajouter_reclamation(Reclamation *reclamations, Utilisateur *utilisateurs, int users_index);
 void modifier_reclamation(Reclamation *reclamations, Utilisateur *utilisateurs, int userindex);
+void affichage_reclamation(Reclamation *reclamations, Utilisateur *utilisateurs, int userindex);
+void supprimer_reclamation(Reclamation *reclamations, Utilisateur *utilisateurs, int userindex);
+
