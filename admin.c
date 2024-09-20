@@ -32,3 +32,228 @@ int modifier_role(Utilisateur *utilisateurs)
     printf("User not found!\n");
     return 1;
 }
+
+
+void affichage_adgent_reclamation(Reclamation *reclamations)
+{
+
+    for (int i = 0; i < reclamations_count; i++)
+    {
+        printf("-------------------------------\n");
+        printf("ID: %d\n", reclamations[i].id);
+        printf("l'auteur: %s\n", reclamations[i].user.user_name);
+        printf("Titre: %s\n", reclamations[i].title);
+        printf("Motif: %s\n", reclamations[i].motif);
+        printf("Description: %s\n", reclamations[i].description);
+        printf("Categorie: %s\n", reclamations[i].categorie);
+        printf("Date: %s\n", reclamations[i].date);
+        printf("Statut: %s\n", reclamations[i].statut);
+        printf("-------------------------------\n");
+    }
+}
+
+
+void modistatut(Reclamation *Reclamations)
+{
+    int id, found = 0, index;
+    char nv_statut[10];
+    char comment[50];
+    printf("Entrer le id de la reclamation a modifiyer: ");
+    scanf("%d", &id);
+    getchar();
+    for (int i = 0; i < reclamations_count; i++)
+    {
+        if(Reclamations[i].id == id)
+        {
+            found = 1;
+            index = i;
+            break;
+        }
+    }
+    if (found ==0)
+    {
+        printf("Reclamation not found\n");
+        return;
+    }
+    do
+    {
+    printf("Entrer le nouveau statut ou Entrer pour skipper:\n");
+    fgets(nv_statut, 10, stdin);
+    if (strlen(nv_statut) == 1)
+    {
+        break;
+    }
+    
+    } while ((strcmp(nv_statut, "En cours,") != 0) && (strcmp(nv_statut, "Resolu") != 0) && (strcmp(nv_statut, "Rejete") != 0));
+
+    if (strlen(nv_statut) > 1)
+    {
+        strcpy(Reclamations[index].statut, nv_statut);
+    }
+    
+    printf("Entrer un commentaire ou Entrer:\n");
+    fgets(comment, 50, stdin);
+    
+    if (strlen(comment) > 1)
+    {
+        strcpy(Reclamations[index].comment, comment);
+    }
+    
+    
+}
+
+
+int recherche(Reclamation *reclamations)
+{
+    int choice;
+    int valide;
+    char choice2[2];
+    do
+    {
+    valide = 0;
+    printf("Avec quoi voullez vous rechercher?\n");
+    printf("1. ID\n");
+    printf("2. username\n");
+    printf("3. Categorie\n");
+    printf("4. Date\n");
+    printf("5. Statut\n");
+    scanf("%d", &choice);
+    getchar();
+    switch (choice)
+    {
+    case 1:
+    {
+        int id;
+        printf("Entrer l'id de la reclamation:\n");
+        scanf("%d", &id);
+        getchar();
+        for (int i = 0; i < reclamations_count; i++)
+        {
+            if (reclamations[i].id == id)
+            {
+                printf("-------------------------------\n");
+                printf("ID: %d\n", reclamations[i].id);
+                printf("l'auteur: %s\n", reclamations[i].user.user_name);
+                printf("Titre: %s\n", reclamations[i].title);
+                printf("Motif: %s\n", reclamations[i].motif);
+                printf("Description: %s\n", reclamations[i].description);
+                printf("Categorie: %s\n", reclamations[i].categorie);
+                printf("Date: %s\n", reclamations[i].date);
+                printf("Statut: %s\n", reclamations[i].statut);
+                printf("-------------------------------\n");
+            }
+            }
+        break;
+    }
+    case 2:
+    {
+        char username[50];
+        printf("Entrer le username de l'utilisateur:\n");
+        scanf("%s", username);
+        getchar();
+        for (int i = 0; i < reclamations_count; i++)
+        {
+            if(strcmp(reclamations[i].user.user_name, username) == 0)
+            {
+                printf("-------------------------------\n");
+                printf("ID: %d\n", reclamations[i].id);
+                printf("l'auteur: %s\n", reclamations[i].user.user_name);
+                printf("Titre: %s\n", reclamations[i].title);
+                printf("Motif: %s\n", reclamations[i].motif);
+                printf("Description: %s\n", reclamations[i].description);
+                printf("Categorie: %s\n", reclamations[i].categorie);
+                printf("Date: %s\n", reclamations[i].date);
+                printf("Statut: %s\n", reclamations[i].statut);
+                printf("-------------------------------\n");
+            }
+        }
+        break;
+    }
+    case 3:
+    {
+        char category[50];
+        printf("Entrer la categorie de la reclamation:\n");
+        fgets(category, 50, stdin);
+        for (int i = 0; i < reclamations_count; i++)
+        {
+            if(strcmp(reclamations[i].categorie, category) == 0)
+            {
+                printf("-------------------------------\n");
+                printf("ID: %d\n", reclamations[i].id);
+                printf("l'auteur: %s\n", reclamations[i].user.user_name);
+                printf("Titre: %s\n", reclamations[i].title);
+                printf("Motif: %s\n", reclamations[i].motif);
+                printf("Description: %s\n", reclamations[i].description);
+                printf("Categorie: %s\n", reclamations[i].categorie);
+                printf("Date: %s\n", reclamations[i].date);
+                printf("Statut: %s\n", reclamations[i].statut);
+                printf("-------------------------------\n");
+            }
+        }
+
+        break;
+    }
+    case 4:
+    {
+        
+        char date[11];
+        printf("Entrer la date de la reclamation en format YYYY-MM-DD:\n");
+        fgets(date, 11, stdin);
+        for (int i = 0; i < reclamations_count; i++)
+        {
+            if (strcmp(reclamations[i].date, date) == 0)
+            {
+                printf("-------------------------------\n");
+                printf("ID: %d\n", reclamations[i].id);
+                printf("l'auteur: %s\n", reclamations[i].user.user_name);
+                printf("Titre: %s\n", reclamations[i].title);
+                printf("Motif: %s\n", reclamations[i].motif);
+                printf("Description: %s\n", reclamations[i].description);
+                printf("Categorie: %s\n", reclamations[i].categorie);
+                printf("Date: %s\n", reclamations[i].date);
+                printf("Statut: %s\n", reclamations[i].statut);
+                printf("-------------------------------\n");
+            }
+        }
+        
+
+        break;
+    }
+    case 5:
+        {
+            char statut[10];
+            printf("Entrer le statut a rechercher\n");
+            fgets(statut, 10, stdin);
+            for (int i = 0; i < reclamations_count; i++)
+            {
+                if (strcmp(reclamations[i].statut, statut) == 0)
+                {
+                    printf("-------------------------------\n");
+                    printf("ID: %d\n", reclamations[i].id);
+                    printf("l'auteur: %s\n", reclamations[i].user.user_name);
+                    printf("Titre: %s\n", reclamations[i].title);
+                    printf("Motif: %s\n", reclamations[i].motif);
+                    printf("Description: %s\n", reclamations[i].description);
+                    printf("Categorie: %s\n", reclamations[i].categorie);
+                    printf("Date: %s\n", reclamations[i].date);
+                    printf("Statut: %s\n", reclamations[i].statut);
+                    printf("-------------------------------\n");
+                }
+                
+            }
+            
+
+        break;
+        }
+    default:
+    printf("Invalid choice\n");
+        break;
+}
+    printf("Voulez-vous faire une autre recherche? \n y/n\n");
+    scanf("%s", choice2);
+    } while (choice2 != "n");
+    
+
+    
+}
+

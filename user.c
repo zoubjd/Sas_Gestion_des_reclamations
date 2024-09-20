@@ -9,7 +9,7 @@ struct date {
 };
 
 
-int ajouter_reclamation(Reclamation *reclamations, Utilisateur *utilisateurs, int users_index)
+int ajouter_reclamation(Reclamation *reclamations, Utilisateur *utilisateurs, int userindex)
 {
     char motif[100];
     char description[200];
@@ -40,7 +40,7 @@ int ajouter_reclamation(Reclamation *reclamations, Utilisateur *utilisateurs, in
     strcpy(reclamations[reclamations_count].date, date);
     int id = id_generation(reclamations);
     reclamations[reclamations_count].id = id;
-    reclamations[reclamations_count].user = utilisateurs[users_count];
+    reclamations[reclamations_count].user = utilisateurs[userindex];
     reclamations_count++;
     return reclamations_count;
 }
@@ -54,11 +54,12 @@ void modifier_reclamation(Reclamation *reclamations, Utilisateur *utilisateurs, 
     char title[50];
     int found = 0;
     int index;
-    printf("Entrer le titre de la reclamation: ");
-    fgets(title, 50, stdin);
+    int id;
+    printf("Entrer le id de la reclamation: ");
+    scanf("%d", &id);
     for (int i = 0; i < reclamations_count; i++)
     {
-        if ((strcmp(title, reclamations[i].title) == 0) && (reclamations[i].user.user_name == utilisateurs[userindex].user_name))
+        if ((id == reclamations[i].id))
         {
             found = 1;
             index = i;
@@ -101,20 +102,27 @@ void modifier_reclamation(Reclamation *reclamations, Utilisateur *utilisateurs, 
     {
         strcpy(reclamations[index].date, date);
     }
-    printf("Reclamation updated!\n");
+    printf("Reclamation a ete modifier avec success!\n");
 
 }
 
-void supprimer_reclamation(Reclamation *reclamations, Utilisateur *utilisateurs, int userindex)
+void supprimer_reclamation(Reclamation *reclamations)
 {
     char title[50];
     int found = 0;
     int index;
-    printf("Entrer le titre de la reclamation: ");
-    fgets(title, 50, stdin);
+    int id;
+    printf("Entrer le id de la reclamation: ");
+    scanf("%d", &id);
+    getchar();
+    if(reclamations_count == 0)
+    {
+        printf("no reclamation found!\n");
+        return;
+    }
     for (int i = 0; i < reclamations_count; i++)
     {
-        if ((strcmp(title, reclamations[i].title) == 0) && (reclamations[i].user.user_name == utilisateurs[userindex].user_name))
+        if ((id == reclamations[i].id))
         {
             found = 1;
             index = i;
@@ -141,8 +149,9 @@ void affichage_reclamation(Reclamation *reclamations, Utilisateur *utilisateurs,
 
     for (int i = 0; i < reclamations_count; i++)
     {
-        if (reclamations[i].user.user_name == utilisateurs[userindex].user_name)
+        if (strcmp(reclamations[i].user.user_name, utilisateurs[userindex].user_name) == 0)
         {
+            printf("-------------------------------\n");
             printf("ID: %d\n", reclamations[i].id);
             printf("Titre: %s\n", reclamations[i].title);
             printf("Motif: %s\n", reclamations[i].motif);
@@ -150,6 +159,7 @@ void affichage_reclamation(Reclamation *reclamations, Utilisateur *utilisateurs,
             printf("Categorie: %s\n", reclamations[i].categorie);
             printf("Date: %s\n", reclamations[i].date);
             printf("Statut: %s\n", reclamations[i].statut);
+            printf("-------------------------------\n");
         }
     }
 }

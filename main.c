@@ -48,7 +48,7 @@ int main()
         index = connexion(utilisateurs);
         if (index >= 0 && strcmp(utilisateurs[index].role, "admin") == 0)
             {
-                printf("Vous etes un administrateur!\n");
+                admin_menu(utilisateurs, reclamations);
             }
             else if (index && strcmp(utilisateurs[index].role, "agent") == 0)
             {
@@ -56,7 +56,7 @@ int main()
             }
             else if (index && strcmp(utilisateurs[index].role, "user") == 0)
             {
-                printf("Vous etes un utilisateur!\n");
+                user_menu(index, utilisateurs, reclamations);
             }
         break;
     }

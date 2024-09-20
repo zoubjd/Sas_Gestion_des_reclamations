@@ -27,6 +27,7 @@ typedef struct {
     char categorie[50];
     char statut[10];
     char date[11];
+    char comment[50];
     
 } Reclamation;
 extern int users_count;
@@ -42,12 +43,23 @@ int check_email(char *email);
 int mdp_check(char *mdp, char *user_name);
 int id_generation(Reclamation *reclamations);
 
+//menues
+int admin_menu(Utilisateur *utilisateurs, Reclamation *Reclamation);
+int user_menu(int userindex, Utilisateur *utilisateurs, Reclamation *reclamations);
+
 // fcts des admin
 int modifier_role(Utilisateur *utilisateurs);
+void affichage_adgent_reclamation(Reclamation *reclamations);
+void modistatut(Reclamation *Reclamations);
+int recherche(Reclamation *reclamations);
+int taux_reclamation(Reclamation *reclamations);
+int delay_moyen(Reclamation *Reclamation);
+int rapport_journalier(Reclamation *reclamation);
+
 
 // fcts de client
-int ajouter_reclamation(Reclamation *reclamations, Utilisateur *utilisateurs, int users_index);
+int ajouter_reclamation(Reclamation *reclamations, Utilisateur *utilisateurs, int userindex);
 void modifier_reclamation(Reclamation *reclamations, Utilisateur *utilisateurs, int userindex);
 void affichage_reclamation(Reclamation *reclamations, Utilisateur *utilisateurs, int userindex);
-void supprimer_reclamation(Reclamation *reclamations, Utilisateur *utilisateurs, int userindex);
+void supprimer_reclamation(Reclamation *reclamations);
 
