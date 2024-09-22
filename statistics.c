@@ -6,24 +6,19 @@
 int taux_reclamation(Reclamation *reclamations)
 {
     int rec_resolue = 0;
-    int rec_non_resolue = 0;
     if (reclamations_count == 0)
     {
         printf("No reclamations found!\n");
         return 0;
     }
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < reclamations_count; i++)
     {
-        if (reclamations[i].statut == "resolu")
+        if (strcmp(reclamations[i].statut, "Resolu") == 0)
         {
             rec_resolue++;
         }
-        else
-        {
-            rec_non_resolue++;
-        }
     }
-    float taux = ((float) rec_resolue / ((float) rec_resolue + (float) rec_non_resolue)) * 100;
+    float taux = ((float) rec_resolue / reclamations_count) * 100;
     printf("Le nombre de reclamations est : %d\n", reclamations_count);
     printf("Le nombre de reclamations resolue est : %d\n", rec_resolue);
     printf("Le nombre de reclamations resolue est : %d\n", rec_resolue);
@@ -75,6 +70,7 @@ int rapport_journalier(Reclamation *reclamation)
         fprintf(f, "Categorie: %s\n", reclamation[i].categorie);
         fprintf(f, "Date: %s\n", reclamation[i].date);
         fprintf(f, "Statut: %s\n", reclamation[i].statut);
+        fprintf(f, "Priorite: %s\n", reclamation[i].priorite);
         fprintf(f, "-------------------------------\n");
     }
     fprintf(f, "les reclamations resolues: \n");
@@ -92,6 +88,7 @@ int rapport_journalier(Reclamation *reclamation)
         fprintf(f, "Categorie: %s\n", reclamation[i].categorie);
         fprintf(f, "Date: %s\n", reclamation[i].date);
         fprintf(f, "Statut: %s\n", reclamation[i].statut);
+        fprintf(f, "Priorite: %s\n", reclamation[i].priorite);
         fprintf(f, "-------------------------------\n");
         }
     }

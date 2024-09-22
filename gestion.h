@@ -3,9 +3,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <time.h>
+#include <unistd.h>
 
 #define MAX_UTILISATEURS 100
 
@@ -28,7 +27,9 @@ typedef struct {
     char statut[10];
     char date[11];
     char comment[50];
-    
+    char priorite[10];
+    struct tm added_time;
+    struct tm treated_time;
 } Reclamation;
 extern int users_count;
 extern int reclamations_count;
@@ -46,6 +47,7 @@ int id_generation(Reclamation *reclamations);
 //menues
 int admin_menu(Utilisateur *utilisateurs, Reclamation *Reclamation);
 int user_menu(int userindex, Utilisateur *utilisateurs, Reclamation *reclamations);
+int agent_menu(int userindex, Utilisateur *utilisateurs, Reclamation *reclamations);
 
 // fcts des admin
 int modifier_role(Utilisateur *utilisateurs);

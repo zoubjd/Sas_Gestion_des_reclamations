@@ -52,7 +52,7 @@ int main()
             }
             else if (index && strcmp(utilisateurs[index].role, "agent") == 0)
             {
-                printf("Vous etes un agent!\n");
+                agent_menu(index, utilisateurs, reclamations);
             }
             else if (index && strcmp(utilisateurs[index].role, "user") == 0)
             {

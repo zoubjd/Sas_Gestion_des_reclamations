@@ -46,7 +46,7 @@ int admin_menu(Utilisateur *utilisateurs, Reclamation *Reclamation)
             break;
         
         case 5:
-            affichage_reclamation(Reclamation, utilisateurs, 0);
+            affichage_adgent_reclamation(Reclamation);
             break;
         
         case 6:

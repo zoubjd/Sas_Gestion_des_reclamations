@@ -18,6 +18,7 @@ int modifier_role(Utilisateur *utilisateurs)
             printf("User found!\n");
             printf("Entrer le nouveau role: ");
             fgets(new_role, 10, stdin);
+            new_role[strcspn(new_role, "\n")] = '\0';
             do
             {
                strcpy(utilisateurs[index].role, new_role);
@@ -48,6 +49,7 @@ void affichage_adgent_reclamation(Reclamation *reclamations)
         printf("Categorie: %s\n", reclamations[i].categorie);
         printf("Date: %s\n", reclamations[i].date);
         printf("Statut: %s\n", reclamations[i].statut);
+        printf("Priorite: %s\n", reclamations[i].priorite);
         printf("-------------------------------\n");
     }
 }
@@ -58,56 +60,70 @@ void modistatut(Reclamation *Reclamations)
     int id, found = 0, index;
     char nv_statut[10];
     char comment[50];
-    printf("Entrer le id de la reclamation a modifiyer: ");
+    printf("Entrer le id de la reclamation a modifier: ");
     scanf("%d", &id);
     getchar();
+
+
     for (int i = 0; i < reclamations_count; i++)
     {
-        if(Reclamations[i].id == id)
+        if (Reclamations[i].id == id)
         {
             found = 1;
             index = i;
             break;
         }
     }
-    if (found ==0)
+    if (found == 0)
     {
         printf("Reclamation not found\n");
         return;
     }
+
+
     do
     {
-    printf("Entrer le nouveau statut ou Entrer pour skipper:\n");
-    fgets(nv_statut, 10, stdin);
-    if (strlen(nv_statut) == 1)
-    {
-        break;
-    }
-    
-    } while ((strcmp(nv_statut, "En cours,") != 0) && (strcmp(nv_statut, "Resolu") != 0) && (strcmp(nv_statut, "Rejete") != 0));
+        printf("Entrer le nouveau statut ou appuyez sur Entrer pour passer:\n");
+        fgets(nv_statut, sizeof(nv_statut), stdin);
 
-    if (strlen(nv_statut) > 1)
+
+        nv_statut[strcspn(nv_statut, "\n")] = '\0';
+
+
+        if (strlen(nv_statut) == 0)
+        {
+            break;
+        }
+    } while ((strcmp(nv_statut, "En cours") != 0) && (strcmp(nv_statut, "Resolu") != 0) && (strcmp(nv_statut, "Rejete") != 0));
+
+
+    if (strlen(nv_statut) > 0)
     {
         strcpy(Reclamations[index].statut, nv_statut);
+        time_t t = time(NULL);
+        struct tm tm = *localtime(&t);
+        
+
     }
-    
-    printf("Entrer un commentaire ou Entrer:\n");
-    fgets(comment, 50, stdin);
-    
+
+    printf("Entrer un commentaire ou appuyez sur Entrer:\n");
+    fgets(comment, sizeof(comment), stdin);
+
+
     if (strlen(comment) > 1)
     {
+        comment[strcspn(comment, "\n")] = '\0'; 
         strcpy(Reclamations[index].comment, comment);
     }
-    
-    
 }
+
 
 
 int recherche(Reclamation *reclamations)
 {
     int choice;
     int valide;
-    char choice2[2];
+    char choice2;
     do
     {
     valide = 0;
@@ -140,6 +156,7 @@ int recherche(Reclamation *reclamations)
                 printf("Categorie: %s\n", reclamations[i].categorie);
                 printf("Date: %s\n", reclamations[i].date);
                 printf("Statut: %s\n", reclamations[i].statut);
+                printf("Priorite: %s\n", reclamations[i].priorite);
                 printf("-------------------------------\n");
             }
             }
@@ -164,6 +181,7 @@ int recherche(Reclamation *reclamations)
                 printf("Categorie: %s\n", reclamations[i].categorie);
                 printf("Date: %s\n", reclamations[i].date);
                 printf("Statut: %s\n", reclamations[i].statut);
+                printf("Priorite: %s\n", reclamations[i].priorite);
                 printf("-------------------------------\n");
             }
         }
@@ -187,7 +205,8 @@ int recherche(Reclamation *reclamations)
                 printf("Categorie: %s\n", reclamations[i].categorie);
                 printf("Date: %s\n", reclamations[i].date);
                 printf("Statut: %s\n", reclamations[i].statut);
-                printf("-------------------------------\n");
+                printf("Priorite: %s\n", reclamations[i].priorite);
+;                printf("-------------------------------\n");
             }
         }
 
@@ -199,6 +218,7 @@ int recherche(Reclamation *reclamations)
         char date[11];
         printf("Entrer la date de la reclamation en format YYYY-MM-DD:\n");
         fgets(date, 11, stdin);
+        date[strcspn(date, "\n")] = '\0';
         for (int i = 0; i < reclamations_count; i++)
         {
             if (strcmp(reclamations[i].date, date) == 0)
@@ -212,6 +232,7 @@ int recherche(Reclamation *reclamations)
                 printf("Categorie: %s\n", reclamations[i].categorie);
                 printf("Date: %s\n", reclamations[i].date);
                 printf("Statut: %s\n", reclamations[i].statut);
+                printf("Priorite: %s\n", reclamations[i].priorite);
                 printf("-------------------------------\n");
             }
         }
@@ -224,6 +245,7 @@ int recherche(Reclamation *reclamations)
             char statut[10];
             printf("Entrer le statut a rechercher\n");
             fgets(statut, 10, stdin);
+            statut[strcspn(statut, "\n")] = '\0';
             for (int i = 0; i < reclamations_count; i++)
             {
                 if (strcmp(reclamations[i].statut, statut) == 0)
@@ -237,6 +259,7 @@ int recherche(Reclamation *reclamations)
                     printf("Categorie: %s\n", reclamations[i].categorie);
                     printf("Date: %s\n", reclamations[i].date);
                     printf("Statut: %s\n", reclamations[i].statut);
+                    printf("Priorite: %s\n", reclamations[i].priorite);
                     printf("-------------------------------\n");
                 }
                 
@@ -249,11 +272,11 @@ int recherche(Reclamation *reclamations)
     printf("Invalid choice\n");
         break;
 }
-    printf("Voulez-vous faire une autre recherche? \n y/n\n");
-    scanf("%s", choice2);
-    } while (choice2 != "n");
+    printf("Voulez-vous faire une autre recherche?\n n pour quitter\n");
+    scanf("%c", &choice2);
+    } while (choice2 != 'n');
     
-
+return 0;
     
 }
 

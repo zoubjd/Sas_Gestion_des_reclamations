@@ -11,17 +11,35 @@ int inscription(Utilisateur *utilisateurs)
     char mdp[50];
     char conf_mdp[50];
     char role[10];
+    int usnm_valid = 1;
 
     printf("Entrer votre nom: ");
     fgets(nom, 50, stdin);
+    nom[strcspn(nom, "\n")] = '\0';
     printf("Entrer votre prenom: ");
     fgets(prenom, 50, stdin);
+    prenom[strcspn(prenom, "\n")] = '\0';
+    do
+    {
     printf("Entrer votre nom d'utilisateur: ");
     fgets(user_name, 50, stdin);
+    for (int i = 0; i < users_count; i++)
+    {
+        if (strcmp(user_name, utilisateurs[i].user_name) == 0)
+        {
+            printf("Nom d'utilisateur deja en utilise!\n");
+            usnm_valid = 0;
+            break;
+        }
+    }
+    
+    } while (usnm_valid == 0);
+    
     do
     {
     printf("Entrer votre email: ");
     fgets(email, 50, stdin);
+    email[strcspn(email, "\n")] = '\0';
     } while (check_email(email) != 1);
     do
     {
@@ -73,9 +91,15 @@ int connexion(Utilisateur *utilisateurs)
         }
     }
     count++;
+    if (count > 0)
+    {
+        printf("Nom d'utilisateur ou mot de passe incorrect\n");
+        printf("Tentatives restantes: %d/3\n", count + 1);
+    }
+    
     } while (count < 3);
     printf("Trop de tentatives. Connexion impossible.\n");
-    exit(-1);
+    sleep(100);
     return -1;
 }
 
