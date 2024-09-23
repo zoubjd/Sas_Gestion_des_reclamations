@@ -138,8 +138,6 @@ default:
     break;
 }    
 }
-
-return 0;
 }
 
 int agent_menu(int userindex, Utilisateur *utilisateurs, Reclamation *reclamations)
@@ -188,18 +186,14 @@ case 6:
     recherche(reclamations);
     break;
     
-
-
 case 7:
-    return 1;
-    break;
+    printf("Deconnexion...\n");
+    return 0;
 
 default:
     printf("Choix Invalide!!\n");
     break;
 }
-
-return 0;
 }
 }
 

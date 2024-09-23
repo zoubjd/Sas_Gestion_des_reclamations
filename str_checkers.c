@@ -94,3 +94,24 @@ int id_generation(Reclamation *reclamations)
 
     return id;
 }
+
+
+void assign_priority(Reclamation *reclamations)
+{
+    for (int j = 0; j < reclamations_count; j++)
+    {
+        strcpy(reclamations[j].priorite, "basse");
+        if (strstr(reclamations[j].priorite, "urgent") || strstr(reclamations[j].priorite, "critical") || strstr(reclamations[j].priorite, "immediate") || strstr(reclamations[j].priorite, "high"))
+        {
+            strcpy(reclamations[j].priorite, "haute");
+        }
+        else if (strstr(reclamations[j].priorite, "average") || strstr(reclamations[j].priorite, "normal") || strstr(reclamations[j].priorite, "moderate"))
+        {
+            strcpy(reclamations[j].priorite, "moyenne");
+        }
+        else
+        {
+            strcpy(reclamations[j].priorite, "basse");
+        }
+    }
+}

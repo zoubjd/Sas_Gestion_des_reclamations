@@ -42,7 +42,6 @@ int ajouter_reclamation(Reclamation *reclamations, Utilisateur *utilisateurs, in
     int id = id_generation(reclamations);
     reclamations[reclamations_count].id = id;
     reclamations[reclamations_count].user = utilisateurs[userindex];
-    reclamations_count++;
     strcpy(reclamations[reclamations_count].priorite, "basse");
 
     if(strstr(reclamations[reclamations_count].description, "help") != NULL || strstr(reclamations[reclamations_count].description, "urgent") != NULL || strstr(reclamations[reclamations_count].description, "sos") != NULL)
@@ -57,6 +56,7 @@ int ajouter_reclamation(Reclamation *reclamations, Utilisateur *utilisateurs, in
 
         strcpy(reclamations[reclamations_count].priorite, "basse");
     }
+    reclamations_count++;
     
     return reclamations_count;
 }
@@ -207,6 +207,7 @@ void affichage_reclamation(Reclamation *reclamations, Utilisateur *utilisateurs,
 }
 
 
+/*
 void assign_priority(Reclamation *reclamations) {
         for (int j = 0; j < reclamations_count; j++) {
             strcpy(reclamations[j].priorite, "basse");
@@ -230,4 +231,5 @@ void assign_priority(Reclamation *reclamations) {
                 }
         }
     }
+    */
 

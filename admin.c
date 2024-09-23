@@ -19,14 +19,13 @@ int modifier_role(Utilisateur *utilisateurs)
             printf("Entrer le nouveau role: ");
             fgets(new_role, 10, stdin);
             new_role[strcspn(new_role, "\n")] = '\0';
-            do
-            {
-               strcpy(utilisateurs[index].role, new_role);
+           if (strcmp(new_role, "admin") == 0 || strcmp(new_role, "agent") == 0 || strcmp(new_role, "user") == 0) {
+                strcpy(utilisateurs[index].role, new_role);
                 printf("Role updated!\n");
-                return 0;
-            } while (strcmp(new_role, "admin") != 0 && strcmp(new_role, "agent") != 0 && strcmp(new_role, "user") != 0);
+            } else {
+                printf("Invalid role! Role not updated.\n");
+            }
 
-            break;
         }
     }
 
@@ -106,9 +105,9 @@ void modistatut(Reclamation *Reclamations)
         strcpy(Reclamations[index].statut, nv_statut);
         time_t t = time(NULL);
         struct tm tm = *localtime(&t);
-        Reclamations[reclamations_count].treated_time = t;
+        Reclamations[index].treated_time = t;
 
-        Reclamations[reclamations_count].delay = difftime(t, Reclamations[index].added_time);
+        Reclamations[index].delay = difftime(t, Reclamations[index].added_time);
 
     }
 
@@ -306,12 +305,9 @@ return 0;
     
 }
 
-void aficher_rec_parprio(Reclamation * reclamations)
-{
-    for (int i = 0; i < reclamations_count; i++)
-    {
-        if (reclamations[i].priorite == "haute")
-        {
+void display_by_priority(Reclamation *reclamations, const char *priority) {
+    for (int i = 0; i < reclamations_count; i++) {
+        if (strcmp(reclamations[i].priorite, priority) == 0) {
             printf("-------------------------------\n");
             printf("ID: %d\n", reclamations[i].id);
             printf("l'auteur: %s\n", reclamations[i].user.user_name);
@@ -322,54 +318,19 @@ void aficher_rec_parprio(Reclamation * reclamations)
             printf("Date: %s\n", reclamations[i].date);
             printf("Statut: %s\n", reclamations[i].statut);
             printf("Priorite: %s\n", reclamations[i].priorite);
-            if (strlen(reclamations[i].comment) > 0)
-            {
+            if (strlen(reclamations[i].comment) > 0) {
                 printf("Commentaire: %s\n", reclamations[i].comment);
             }
             printf("-------------------------------\n");
-        }   
+        }
+    }
 }
-    for (int i = 0; i < reclamations_count; i++)
-    {
-        if (reclamations[i].priorite == "moyenne")
-        {
-            printf("-------------------------------\n");
-            printf("ID: %d\n", reclamations[i].id);
-            printf("l'auteur: %s\n", reclamations[i].user.user_name);
-            printf("Titre: %s\n", reclamations[i].title);
-            printf("Motif: %s\n", reclamations[i].motif);
-            printf("Description: %s\n", reclamations[i].description);
-            printf("Categorie: %s\n", reclamations[i].categorie);
-            printf("Date: %s\n", reclamations[i].date);
-            printf("Statut: %s\n", reclamations[i].statut);
-            printf("Priorite: %s\n", reclamations[i].priorite);
-            if (strlen(reclamations[i].comment) > 0)
-            {
-                printf("Commentaire: %s\n", reclamations[i].comment);
-            }
-            printf("-------------------------------\n");
-        }   
+
+void aficher_rec_parprio(Reclamation *reclamations) {
+    const char *priorities[] = {"haute", "moyenne", "basse"};
+    for (int i = 0; i < 3; i++) {
+        display_by_priority(reclamations, priorities[i]);
+    }
 }
-    for (int i = 0; i < reclamations_count; i++)
-    {
-        if (reclamations[i].priorite == "basse")
-        {
-            printf("-------------------------------\n");
-            printf("ID: %d\n", reclamations[i].id);
-            printf("l'auteur: %s\n", reclamations[i].user.user_name);
-            printf("Titre: %s\n", reclamations[i].title);
-            printf("Motif: %s\n", reclamations[i].motif);
-            printf("Description: %s\n", reclamations[i].description);
-            printf("Categorie: %s\n", reclamations[i].categorie);
-            printf("Date: %s\n", reclamations[i].date);
-            printf("Statut: %s\n", reclamations[i].statut);
-            printf("Priorite: %s\n", reclamations[i].priorite);
-            if (strlen(reclamations[i].comment) > 0)
-            {
-                printf("Commentaire: %s\n", reclamations[i].comment);
-            }
-            printf("-------------------------------\n");
-        }   
-}
-}
+
 
