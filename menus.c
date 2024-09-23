@@ -22,7 +22,7 @@ int admin_menu(Utilisateur *utilisateurs, Reclamation *Reclamation)
         printf("8. Afficher le nombre total de réclamation\n");
         printf("9. Afficher le taux de résolution des réclamations\n");
         printf("10. Calculer le délai moyen de traitement des réclamations\n");
-        printf("11. Rapport journalier\n");
+        printf("11. Afficher les rapports triee par priorite\n");
         printf("12. Deconexion\n");
         printf("---------------------------------------\n");
         scanf("%d", &choice);
@@ -35,6 +35,7 @@ int admin_menu(Utilisateur *utilisateurs, Reclamation *Reclamation)
         
         case 2:
             ajouter_reclamation(Reclamation, utilisateurs, 0);
+            assign_priority(Reclamation);
             break;
         
         case 3:
@@ -70,12 +71,16 @@ int admin_menu(Utilisateur *utilisateurs, Reclamation *Reclamation)
             break;
         
         case 11:
-            rapport_journalier(Reclamation);
+            aficher_rec_parprio(Reclamation);
             break;
         
         case 12:
             printf("Au revoir!\n");
             return 0;
+            break;
+
+        case 13:
+            rapport_journalier(Reclamation);
             break;
         
         default:
@@ -108,6 +113,7 @@ switch (choice)
 {
 case 1:
     ajouter_reclamation(reclamations, utilisateurs, userindex);
+    assign_priority(reclamations);
     printf("Reclamation ajouter avec succes!\n");
     break;
 
@@ -158,6 +164,7 @@ switch (choice)
 {
 case 1:
     ajouter_reclamation(reclamations, utilisateurs, userindex);
+    assign_priority(reclamations);
     printf("Reclamation ajouter avec succes!\n");
     break;
 

@@ -28,8 +28,9 @@ typedef struct {
     char date[11];
     char comment[50];
     char priorite[10];
-    struct tm added_time;
-    struct tm treated_time;
+    time_t added_time;
+    time_t treated_time;
+    double delay;
 } Reclamation;
 extern int users_count;
 extern int reclamations_count;
@@ -43,6 +44,7 @@ int connexion(Utilisateur *utilisateurs);
 int check_email(char *email);
 int mdp_check(char *mdp, char *user_name);
 int id_generation(Reclamation *reclamations);
+void assign_priority(Reclamation *reclamations);
 
 //menues
 int admin_menu(Utilisateur *utilisateurs, Reclamation *Reclamation);
@@ -57,6 +59,7 @@ int recherche(Reclamation *reclamations);
 int taux_reclamation(Reclamation *reclamations);
 int delay_moyen(Reclamation *Reclamation);
 int rapport_journalier(Reclamation *reclamation);
+void aficher_rec_parprio(Reclamation * reclamations);
 
 
 // fcts de client

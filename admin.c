@@ -40,17 +40,21 @@ void affichage_adgent_reclamation(Reclamation *reclamations)
 
     for (int i = 0; i < reclamations_count; i++)
     {
-        printf("-------------------------------\n");
-        printf("ID: %d\n", reclamations[i].id);
-        printf("l'auteur: %s\n", reclamations[i].user.user_name);
-        printf("Titre: %s\n", reclamations[i].title);
-        printf("Motif: %s\n", reclamations[i].motif);
-        printf("Description: %s\n", reclamations[i].description);
-        printf("Categorie: %s\n", reclamations[i].categorie);
-        printf("Date: %s\n", reclamations[i].date);
-        printf("Statut: %s\n", reclamations[i].statut);
-        printf("Priorite: %s\n", reclamations[i].priorite);
-        printf("-------------------------------\n");
+                    printf("-------------------------------\n");
+                    printf("ID: %d\n", reclamations[i].id);
+                    printf("l'auteur: %s\n", reclamations[i].user.user_name);
+                    printf("Titre: %s\n", reclamations[i].title);
+                    printf("Motif: %s\n", reclamations[i].motif);
+                    printf("Description: %s\n", reclamations[i].description);
+                    printf("Categorie: %s\n", reclamations[i].categorie);
+                    printf("Date: %s\n", reclamations[i].date);
+                    printf("Statut: %s\n", reclamations[i].statut);
+                    printf("Priorite: %s\n", reclamations[i].priorite);
+                    if (strlen(reclamations[i].comment) > 0)
+                    {
+                        printf("Commentaire: %s\n", reclamations[i].comment);
+                    }
+                    printf("-------------------------------\n");
     }
 }
 
@@ -102,7 +106,9 @@ void modistatut(Reclamation *Reclamations)
         strcpy(Reclamations[index].statut, nv_statut);
         time_t t = time(NULL);
         struct tm tm = *localtime(&t);
-        
+        Reclamations[reclamations_count].treated_time = t;
+
+        Reclamations[reclamations_count].delay = difftime(t, Reclamations[index].added_time);
 
     }
 
@@ -147,17 +153,21 @@ int recherche(Reclamation *reclamations)
         {
             if (reclamations[i].id == id)
             {
-                printf("-------------------------------\n");
-                printf("ID: %d\n", reclamations[i].id);
-                printf("l'auteur: %s\n", reclamations[i].user.user_name);
-                printf("Titre: %s\n", reclamations[i].title);
-                printf("Motif: %s\n", reclamations[i].motif);
-                printf("Description: %s\n", reclamations[i].description);
-                printf("Categorie: %s\n", reclamations[i].categorie);
-                printf("Date: %s\n", reclamations[i].date);
-                printf("Statut: %s\n", reclamations[i].statut);
-                printf("Priorite: %s\n", reclamations[i].priorite);
-                printf("-------------------------------\n");
+                    printf("-------------------------------\n");
+                    printf("ID: %d\n", reclamations[i].id);
+                    printf("l'auteur: %s\n", reclamations[i].user.user_name);
+                    printf("Titre: %s\n", reclamations[i].title);
+                    printf("Motif: %s\n", reclamations[i].motif);
+                    printf("Description: %s\n", reclamations[i].description);
+                    printf("Categorie: %s\n", reclamations[i].categorie);
+                    printf("Date: %s\n", reclamations[i].date);
+                    printf("Statut: %s\n", reclamations[i].statut);
+                    printf("Priorite: %s\n", reclamations[i].priorite);
+                    if (strlen(reclamations[i].comment) > 0)
+                    {
+                        printf("Commentaire: %s\n", reclamations[i].comment);
+                    }
+                    printf("-------------------------------\n");
             }
             }
         break;
@@ -172,17 +182,21 @@ int recherche(Reclamation *reclamations)
         {
             if(strcmp(reclamations[i].user.user_name, username) == 0)
             {
-                printf("-------------------------------\n");
-                printf("ID: %d\n", reclamations[i].id);
-                printf("l'auteur: %s\n", reclamations[i].user.user_name);
-                printf("Titre: %s\n", reclamations[i].title);
-                printf("Motif: %s\n", reclamations[i].motif);
-                printf("Description: %s\n", reclamations[i].description);
-                printf("Categorie: %s\n", reclamations[i].categorie);
-                printf("Date: %s\n", reclamations[i].date);
-                printf("Statut: %s\n", reclamations[i].statut);
-                printf("Priorite: %s\n", reclamations[i].priorite);
-                printf("-------------------------------\n");
+                    printf("-------------------------------\n");
+                    printf("ID: %d\n", reclamations[i].id);
+                    printf("l'auteur: %s\n", reclamations[i].user.user_name);
+                    printf("Titre: %s\n", reclamations[i].title);
+                    printf("Motif: %s\n", reclamations[i].motif);
+                    printf("Description: %s\n", reclamations[i].description);
+                    printf("Categorie: %s\n", reclamations[i].categorie);
+                    printf("Date: %s\n", reclamations[i].date);
+                    printf("Statut: %s\n", reclamations[i].statut);
+                    printf("Priorite: %s\n", reclamations[i].priorite);
+                    if (strlen(reclamations[i].comment) > 0)
+                    {
+                        printf("Commentaire: %s\n", reclamations[i].comment);
+                    }
+                    printf("-------------------------------\n");
             }
         }
         break;
@@ -196,17 +210,21 @@ int recherche(Reclamation *reclamations)
         {
             if(strcmp(reclamations[i].categorie, category) == 0)
             {
-                printf("-------------------------------\n");
-                printf("ID: %d\n", reclamations[i].id);
-                printf("l'auteur: %s\n", reclamations[i].user.user_name);
-                printf("Titre: %s\n", reclamations[i].title);
-                printf("Motif: %s\n", reclamations[i].motif);
-                printf("Description: %s\n", reclamations[i].description);
-                printf("Categorie: %s\n", reclamations[i].categorie);
-                printf("Date: %s\n", reclamations[i].date);
-                printf("Statut: %s\n", reclamations[i].statut);
-                printf("Priorite: %s\n", reclamations[i].priorite);
-;                printf("-------------------------------\n");
+                    printf("-------------------------------\n");
+                    printf("ID: %d\n", reclamations[i].id);
+                    printf("l'auteur: %s\n", reclamations[i].user.user_name);
+                    printf("Titre: %s\n", reclamations[i].title);
+                    printf("Motif: %s\n", reclamations[i].motif);
+                    printf("Description: %s\n", reclamations[i].description);
+                    printf("Categorie: %s\n", reclamations[i].categorie);
+                    printf("Date: %s\n", reclamations[i].date);
+                    printf("Statut: %s\n", reclamations[i].statut);
+                    printf("Priorite: %s\n", reclamations[i].priorite);
+                    if (strlen(reclamations[i].comment) > 0)
+                    {
+                        printf("Commentaire: %s\n", reclamations[i].comment);
+                    }
+                    printf("-------------------------------\n");
             }
         }
 
@@ -223,17 +241,21 @@ int recherche(Reclamation *reclamations)
         {
             if (strcmp(reclamations[i].date, date) == 0)
             {
-                printf("-------------------------------\n");
-                printf("ID: %d\n", reclamations[i].id);
-                printf("l'auteur: %s\n", reclamations[i].user.user_name);
-                printf("Titre: %s\n", reclamations[i].title);
-                printf("Motif: %s\n", reclamations[i].motif);
-                printf("Description: %s\n", reclamations[i].description);
-                printf("Categorie: %s\n", reclamations[i].categorie);
-                printf("Date: %s\n", reclamations[i].date);
-                printf("Statut: %s\n", reclamations[i].statut);
-                printf("Priorite: %s\n", reclamations[i].priorite);
-                printf("-------------------------------\n");
+                    printf("-------------------------------\n");
+                    printf("ID: %d\n", reclamations[i].id);
+                    printf("l'auteur: %s\n", reclamations[i].user.user_name);
+                    printf("Titre: %s\n", reclamations[i].title);
+                    printf("Motif: %s\n", reclamations[i].motif);
+                    printf("Description: %s\n", reclamations[i].description);
+                    printf("Categorie: %s\n", reclamations[i].categorie);
+                    printf("Date: %s\n", reclamations[i].date);
+                    printf("Statut: %s\n", reclamations[i].statut);
+                    printf("Priorite: %s\n", reclamations[i].priorite);
+                    if (strlen(reclamations[i].comment) > 0)
+                    {
+                        printf("Commentaire: %s\n", reclamations[i].comment);
+                    }
+                    printf("-------------------------------\n");
             }
         }
         
@@ -260,6 +282,10 @@ int recherche(Reclamation *reclamations)
                     printf("Date: %s\n", reclamations[i].date);
                     printf("Statut: %s\n", reclamations[i].statut);
                     printf("Priorite: %s\n", reclamations[i].priorite);
+                    if (strlen(reclamations[i].comment) > 0)
+                    {
+                        printf("Commentaire: %s\n", reclamations[i].comment);
+                    }
                     printf("-------------------------------\n");
                 }
                 
@@ -278,5 +304,72 @@ int recherche(Reclamation *reclamations)
     
 return 0;
     
+}
+
+void aficher_rec_parprio(Reclamation * reclamations)
+{
+    for (int i = 0; i < reclamations_count; i++)
+    {
+        if (reclamations[i].priorite == "haute")
+        {
+            printf("-------------------------------\n");
+            printf("ID: %d\n", reclamations[i].id);
+            printf("l'auteur: %s\n", reclamations[i].user.user_name);
+            printf("Titre: %s\n", reclamations[i].title);
+            printf("Motif: %s\n", reclamations[i].motif);
+            printf("Description: %s\n", reclamations[i].description);
+            printf("Categorie: %s\n", reclamations[i].categorie);
+            printf("Date: %s\n", reclamations[i].date);
+            printf("Statut: %s\n", reclamations[i].statut);
+            printf("Priorite: %s\n", reclamations[i].priorite);
+            if (strlen(reclamations[i].comment) > 0)
+            {
+                printf("Commentaire: %s\n", reclamations[i].comment);
+            }
+            printf("-------------------------------\n");
+        }   
+}
+    for (int i = 0; i < reclamations_count; i++)
+    {
+        if (reclamations[i].priorite == "moyenne")
+        {
+            printf("-------------------------------\n");
+            printf("ID: %d\n", reclamations[i].id);
+            printf("l'auteur: %s\n", reclamations[i].user.user_name);
+            printf("Titre: %s\n", reclamations[i].title);
+            printf("Motif: %s\n", reclamations[i].motif);
+            printf("Description: %s\n", reclamations[i].description);
+            printf("Categorie: %s\n", reclamations[i].categorie);
+            printf("Date: %s\n", reclamations[i].date);
+            printf("Statut: %s\n", reclamations[i].statut);
+            printf("Priorite: %s\n", reclamations[i].priorite);
+            if (strlen(reclamations[i].comment) > 0)
+            {
+                printf("Commentaire: %s\n", reclamations[i].comment);
+            }
+            printf("-------------------------------\n");
+        }   
+}
+    for (int i = 0; i < reclamations_count; i++)
+    {
+        if (reclamations[i].priorite == "basse")
+        {
+            printf("-------------------------------\n");
+            printf("ID: %d\n", reclamations[i].id);
+            printf("l'auteur: %s\n", reclamations[i].user.user_name);
+            printf("Titre: %s\n", reclamations[i].title);
+            printf("Motif: %s\n", reclamations[i].motif);
+            printf("Description: %s\n", reclamations[i].description);
+            printf("Categorie: %s\n", reclamations[i].categorie);
+            printf("Date: %s\n", reclamations[i].date);
+            printf("Statut: %s\n", reclamations[i].statut);
+            printf("Priorite: %s\n", reclamations[i].priorite);
+            if (strlen(reclamations[i].comment) > 0)
+            {
+                printf("Commentaire: %s\n", reclamations[i].comment);
+            }
+            printf("-------------------------------\n");
+        }   
+}
 }
 

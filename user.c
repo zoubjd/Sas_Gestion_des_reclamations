@@ -20,7 +20,7 @@ int ajouter_reclamation(Reclamation *reclamations, Utilisateur *utilisateurs, in
     time_t t = time(NULL);
     struct tm tm = *localtime(&t);
     sprintf(date, "%04d-%02d-%02d", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday);
-    reclamations[reclamations_count].added_time = tm;
+    reclamations[reclamations_count].added_time = t; 
 
  
 
@@ -43,6 +43,8 @@ int ajouter_reclamation(Reclamation *reclamations, Utilisateur *utilisateurs, in
     reclamations[reclamations_count].id = id;
     reclamations[reclamations_count].user = utilisateurs[userindex];
     reclamations_count++;
+    strcpy(reclamations[reclamations_count].priorite, "basse");
+
     if(strstr(reclamations[reclamations_count].description, "help") != NULL || strstr(reclamations[reclamations_count].description, "urgent") != NULL || strstr(reclamations[reclamations_count].description, "sos") != NULL)
     {
         strcpy(reclamations[reclamations_count].priorite, "haute");
@@ -52,6 +54,7 @@ int ajouter_reclamation(Reclamation *reclamations, Utilisateur *utilisateurs, in
         strcpy(reclamations[reclamations_count].priorite, "moyenne");
     }
     else{
+
         strcpy(reclamations[reclamations_count].priorite, "basse");
     }
     
@@ -87,12 +90,12 @@ void modifier_reclamation(Reclamation *reclamations, Utilisateur *utilisateurs, 
     }
     time_t now = time(NULL);
     
-    double diff_in_seconds = difftime(now, mktime(&reclamations[index].added_time));
+    double diff_in_seconds = difftime(now, reclamations[index].added_time);
 
-    if (diff_in_seconds > 86400)
+    if (diff_in_seconds > 86400 || strcmp(reclamations[index].statut, "En cours") != 0)
     {
 
-        printf("La reclamation a plus de 24 heures et ne peut pas être modifiée!\n");
+        printf("La reclamation a plus de 24 heures et ne peut pas etre modifiee!\n");
         return;
     }
 
@@ -158,6 +161,16 @@ void supprimer_reclamation(Reclamation *reclamations)
         printf("Reclamation not found!\n");
         return;
     }
+    time_t now = time(NULL);
+    
+    double diff_in_seconds = difftime(now, reclamations[index].added_time);
+
+    if (diff_in_seconds > 86400 || strcmp(reclamations[index].statut, "En cours") != 0)
+    {
+
+        printf("La reclamation a plus de 24 heures et ne peut pas être suprime!\n");
+        return;
+    }
 
     for (int i = index; i < reclamations_count - 1; i++)
     {
@@ -184,7 +197,37 @@ void affichage_reclamation(Reclamation *reclamations, Utilisateur *utilisateurs,
             printf("Date: %s\n", reclamations[i].date);
             printf("Statut: %s\n", reclamations[i].statut);
             printf("Priorite: %s\n", reclamations[i].priorite);
+            if (strlen(reclamations[i].comment) > 0)
+            {
+                printf("Commentaire: %s\n", reclamations[i].comment);
+            }
             printf("-------------------------------\n");
         }
     }
 }
+
+
+void assign_priority(Reclamation *reclamations) {
+        for (int j = 0; j < reclamations_count; j++) {
+            strcpy(reclamations[j].priorite, "basse");
+
+            if (strstr(reclamations[j].priorite, "urgent") ||
+                strstr(reclamations[j].priorite, "critical") ||
+                strstr(reclamations[j].priorite, "immediate") ||
+                strstr(reclamations[j].priorite, "high")) {
+                    strcpy(reclamations[j].priorite, "haute");
+                }
+
+            else if (strstr(reclamations[j].priorite, "average") ||
+                strstr(reclamations[j].priorite, "normal") ||
+                strstr(reclamations[j].priorite, "moderate")) {
+                    strcpy(reclamations[j].priorite, "moyenne");
+                }
+            else if (strstr(reclamations[j].priorite, "simple") ||
+                strstr(reclamations[j].priorite, "low") ||
+                strstr(reclamations[j].priorite, "easy")) {
+                    strcpy(reclamations[j].priorite, "basse");
+                }
+        }
+    }
+
