@@ -57,7 +57,7 @@ int mdp_check(char *mdp, char *user_name)
     }
     for (int i = 0; i < size; i++)
     {
-        if(mdp[i] == '!' || mdp[i] == '#' || mdp[i] == '$' || mdp[i] == '%' || mdp[i] == '^' || mdp[i] == '&' || mdp[i] == '*' || mdp[i] == '(' || mdp[i] == ')' || mdp[i] == '?' || mdp[i] == '@'){
+        if(ispunct(mdp[i])){
             count++;
             break;
         }
