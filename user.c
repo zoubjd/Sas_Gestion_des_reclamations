@@ -42,13 +42,13 @@ int ajouter_reclamation(Reclamation *reclamations, Utilisateur *utilisateurs, in
     int id = id_generation(reclamations);
     reclamations[reclamations_count].id = id;
     reclamations[reclamations_count].user = utilisateurs[userindex];
-    strcpy(reclamations[reclamations_count].priorite, "basse");
+    //strcpy(reclamations[reclamations_count].priorite, "basse");
 
-    if(strstr(reclamations[reclamations_count].description, "help") != NULL || strstr(reclamations[reclamations_count].description, "urgent") != NULL || strstr(reclamations[reclamations_count].description, "sos") != NULL)
+    if(strstr(reclamations[reclamations_count].description, "help") || strstr(reclamations[reclamations_count].description, "urgent") || strstr(reclamations[reclamations_count].description, "sos"))
     {
         strcpy(reclamations[reclamations_count].priorite, "haute");
     }
-    else if (strstr(reclamations[reclamations_count].description, "aide") != NULL || strstr(reclamations[reclamations_count].description, "problem") != NULL || strstr(reclamations[reclamations_count].description, "casse") != NULL)
+    else if (strstr(reclamations[reclamations_count].description, "aide") || strstr(reclamations[reclamations_count].description, "problem") || strstr(reclamations[reclamations_count].description, "casse"))
     {
         strcpy(reclamations[reclamations_count].priorite, "moyenne");
     }
@@ -57,6 +57,7 @@ int ajouter_reclamation(Reclamation *reclamations, Utilisateur *utilisateurs, in
         strcpy(reclamations[reclamations_count].priorite, "basse");
     }
     reclamations_count++;
+    printf("Reclamation ajoutee avec success!!!\n");
     
     return reclamations_count;
 }
@@ -74,6 +75,7 @@ void modifier_reclamation(Reclamation *reclamations, Utilisateur *utilisateurs, 
     char n_date[11];
     printf("Entrer le id de la reclamation: ");
     scanf("%d", &id);
+    getchar();
     for (int i = 0; i < reclamations_count; i++)
     {
         if (reclamations[i].id == id)
@@ -128,6 +130,18 @@ void modifier_reclamation(Reclamation *reclamations, Utilisateur *utilisateurs, 
     if(strlen(date) > 1)
     {
         strcpy(reclamations[index].date, date);
+    }
+    if(strstr(reclamations[index].description, "help") || strstr(reclamations[index].description, "urgent") || strstr(reclamations[index].description, "sos"))
+    {
+        strcpy(reclamations[index].priorite, "haute");
+    }
+    else if (strstr(reclamations[index].description, "aide") || strstr(reclamations[index].description, "problem") || strstr(reclamations[index].description, "casse"))
+    {
+        strcpy(reclamations[index].priorite, "moyenne");
+    }
+    else{
+
+        strcpy(reclamations[index].priorite, "basse");
     }
     printf("Reclamation a ete modifier avec success!\n");
 

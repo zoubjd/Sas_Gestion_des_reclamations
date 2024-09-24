@@ -2,7 +2,7 @@
 #include "gestion.h"
 
 /*
-Projet SAS : Gestion des réclamations
+Projet SAS : Gestion des reclamations
 */
 
 

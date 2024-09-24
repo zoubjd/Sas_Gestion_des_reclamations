@@ -31,6 +31,7 @@ typedef struct {
     time_t added_time;
     time_t treated_time;
     double delay;
+    time_t rapp_last;
 } Reclamation;
 extern int users_count;
 extern int reclamations_count;
@@ -60,6 +61,8 @@ int taux_reclamation(Reclamation *reclamations);
 int delay_moyen(Reclamation *Reclamation);
 int rapport_journalier(Reclamation *reclamation);
 void aficher_rec_parprio(Reclamation * reclamations);
+void supprimer_adgent_reclamation(Reclamation *reclamations);
+void modifier_adgent_reclamation(Reclamation *reclamations);
 
 
 // fcts de client

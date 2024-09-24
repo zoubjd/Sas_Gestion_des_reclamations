@@ -29,7 +29,7 @@ int mdp_check(char *mdp, char *user_name)
     {
         return 0;
     }
-    if(strstr(mdp, user_name) != NULL)
+    if(strstr(mdp, user_name))
     {
         return 0;
     }
@@ -57,7 +57,7 @@ int mdp_check(char *mdp, char *user_name)
     }
     for (int i = 0; i < size; i++)
     {
-        if(mdp[i] == '!' || mdp[i] == '#' || mdp[i] == '$' || mdp[i] == '%' || mdp[i] == '^' || mdp[i] == '&' || mdp[i] == '*' || mdp[i] == '(' || mdp[i] == ')' || mdp[i] == '?'){
+        if(mdp[i] == '!' || mdp[i] == '#' || mdp[i] == '$' || mdp[i] == '%' || mdp[i] == '^' || mdp[i] == '&' || mdp[i] == '*' || mdp[i] == '(' || mdp[i] == ')' || mdp[i] == '?' || mdp[i] == '@'){
             count++;
             break;
         }

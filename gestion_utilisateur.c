@@ -94,7 +94,7 @@ int connexion(Utilisateur *utilisateurs)
     if (count > 0)
     {
         printf("Nom d'utilisateur ou mot de passe incorrect\n");
-        printf("Tentatives restantes: %d/3\n", count + 1);
+        printf("Tentatives restantes: %d/3\n", count);
     }
     
     } while (count < 3);

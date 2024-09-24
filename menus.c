@@ -15,15 +15,16 @@ int admin_menu(Utilisateur *utilisateurs, Reclamation *Reclamation)
         printf("2. Ajouter une reclamation\n");
         printf("3. modifiyer une reclamations\n");
         printf("4. Supprimer une reclamations\n");
-        printf("5. Afficher les réclamation\n");
-        printf("6. Modifer le statut d'une réclamation\n");
+        printf("5. Afficher les reclamation\n");
+        printf("6. Modifer le statut d'une reclamation\n");
         printf("7. Rechercher une reclamation:\n");
         printf("Statistic et rapports---\n");
-        printf("8. Afficher le nombre total de réclamation\n");
-        printf("9. Afficher le taux de résolution des réclamations\n");
-        printf("10. Calculer le délai moyen de traitement des réclamations\n");
+        printf("8. Afficher le nombre total de reclamation\n");
+        printf("9. Afficher le taux de résolution des reclamations\n");
+        printf("10. Calculer le délai moyen de traitement des reclamations\n");
         printf("11. Afficher les rapports triee par priorite\n");
-        printf("12. Deconexion\n");
+        printf("12. Generer le rapport quotidien!\n");
+        printf("13. Deconexion\n");
         printf("---------------------------------------\n");
         scanf("%d", &choice);
         getchar();
@@ -35,15 +36,14 @@ int admin_menu(Utilisateur *utilisateurs, Reclamation *Reclamation)
         
         case 2:
             ajouter_reclamation(Reclamation, utilisateurs, 0);
-            assign_priority(Reclamation);
             break;
         
         case 3:
-            modifier_reclamation(Reclamation, utilisateurs, 0);
+            modifier_adgent_reclamation(Reclamation);
             break;
         
         case 4:
-            supprimer_reclamation(Reclamation);
+            supprimer_adgent_reclamation(Reclamation);
             break;
         
         case 5:
@@ -75,14 +75,14 @@ int admin_menu(Utilisateur *utilisateurs, Reclamation *Reclamation)
             break;
         
         case 12:
-            printf("Au revoir!\n");
-            return 0;
+            rapport_journalier(Reclamation);
             break;
 
         case 13:
-            rapport_journalier(Reclamation);
+            printf("Au revoir!\n");
+            return 0;
             break;
-        
+ 
         default:
         printf("Choix incorrecte\n");
             break;
@@ -104,7 +104,7 @@ printf("Entrer votre choix:\n");
 printf("1. Ajouter une reclamation\n");
 printf("2. modifiyer une reclamations\n");
 printf("3. Supprimer une reclamations\n");
-printf("4. Afficher les réclamation\n");
+printf("4. Afficher les reclamation\n");
 printf("5. Deconnexion\n");
 printf("--------------------------------\n");
 scanf("%d", &choice);
@@ -113,7 +113,6 @@ switch (choice)
 {
 case 1:
     ajouter_reclamation(reclamations, utilisateurs, userindex);
-    assign_priority(reclamations);
     printf("Reclamation ajouter avec succes!\n");
     break;
 
@@ -151,8 +150,8 @@ printf("Entrer votre choix:\n");
 printf("1. Ajouter une reclamation\n");
 printf("2. modifiyer une reclamations\n");
 printf("3. Supprimer une reclamations\n");
-printf("4. Afficher les réclamation\n");
-printf("5. Modifer le statut d'une réclamation\n");
+printf("4. Afficher les reclamation\n");
+printf("5. Modifer le statut d'une reclamation\n");
 printf("6. Rechercher une reclamation:\n");
 printf("7. Deconnexion\n");
 printf("--------------------------------\n");
@@ -162,16 +161,15 @@ switch (choice)
 {
 case 1:
     ajouter_reclamation(reclamations, utilisateurs, userindex);
-    assign_priority(reclamations);
     printf("Reclamation ajouter avec succes!\n");
     break;
 
 case 2:
-    modifier_reclamation(reclamations, utilisateurs, userindex);
+    modifier_adgent_reclamation(reclamations);
     break;
 
 case 3:
-    supprimer_reclamation(reclamations);
+    supprimer_adgent_reclamation(reclamations);
     break;
 
 case 4:

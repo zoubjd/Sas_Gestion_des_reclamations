@@ -333,4 +333,118 @@ void aficher_rec_parprio(Reclamation *reclamations) {
     }
 }
 
+void modifier_adgent_reclamation(Reclamation *reclamations)
+{
+    char motif[100];
+    char description[200];
+    char categorie[50];
+    char date[11];
+    char title[50];
+    int found = 0;
+    int index;
+    int id;
+    char n_date[11];
+    printf("Entrer le id de la reclamation: ");
+    scanf("%d", &id);
+    getchar();
+    for (int i = 0; i < reclamations_count; i++)
+    {
+        if (reclamations[i].id == id)
+        {
+            found = 1;
+            index = i;
+            break;
+        }
+    }
+    if(found == 0)
+    {
+        printf("Reclamation not found!\n");
+        return;
+    }
+
+    printf("modifier le titre ou enter pour skiper: ");
+    fgets(title, 50, stdin);
+    if(strlen(title) > 1)
+    {
+        strcpy(reclamations[index].title, title);
+    }
+    printf("modifier le motif ou enter pour skiper: ");
+    fgets(motif, 100, stdin);
+    if(strlen(motif) > 1)
+    {
+        strcpy(reclamations[index].motif, motif);
+    }
+    printf("modifier la description ou Entrer: ");
+    fgets(description, 200, stdin);
+    if(strlen(description) > 1)
+    {
+        strcpy(reclamations[index].description, description);
+    }
+    printf("modifier la categorie ou Entrer: ");
+    fgets(categorie, 50, stdin);
+    if(strlen(categorie) > 1)
+    {
+        strcpy(reclamations[index].categorie, categorie);
+    }
+    printf("Modifier la date ou Entrer: ");
+    fgets(date, 11, stdin);
+    if(strlen(date) > 1)
+    {
+        strcpy(reclamations[index].date, date);
+    }
+
+    if(strstr(reclamations[index].description, "help") || strstr(reclamations[index].description, "urgent") || strstr(reclamations[index].description, "sos"))
+    {
+        strcpy(reclamations[index].priorite, "haute");
+    }
+    else if (strstr(reclamations[index].description, "aide") || strstr(reclamations[index].description, "problem") || strstr(reclamations[index].description, "casse"))
+    {
+        strcpy(reclamations[index].priorite, "moyenne");
+    }
+    else{
+
+        strcpy(reclamations[index].priorite, "basse");
+    }
+    printf("Reclamation a ete modifier avec success!\n");
+
+} 
+
+void supprimer_adgent_reclamation(Reclamation *reclamations)
+{
+    char title[50];
+    int found = 0;
+    int index;
+    int id;
+    printf("Entrer le id de la reclamation: ");
+    scanf("%d", &id);
+    getchar();
+    if(reclamations_count == 0)
+    {
+        printf("no reclamation found!\n");
+        return;
+    }
+    for (int i = 0; i < reclamations_count; i++)
+    {
+        if (reclamations[i].id == id)
+        {
+            found = 1;
+            index = i;
+            break;
+        }
+    }
+    if(found == 0)
+    {
+        printf("Reclamation not found!\n");
+        return;
+    }
+    
+
+    for (int i = index; i < reclamations_count - 1; i++)
+    {
+        reclamations[i] = reclamations[i + 1];
+    }
+    reclamations_count--;
+    printf("Reclamation deleted!\n");
+}
+
 
